@@ -30,8 +30,12 @@
 			<p>You will receive <span id="converted-money"></span> of the <span id="new-currency"></span> currency</p>
 		</div>
 
-		<div id="invalid-currency-message">
+		<div id="invalid-currency-message" class="error-message-container">
 			<p>The currency <span id="invalid-currency"></span> is not supported.</p>
+		</div>
+		<div id="invalid-request-message" class="error-message-container">
+			<p>The request made to the API was invalid. The response returned the following error:</p>
+			<p><span id="invalid-request-error"></span></p>
 		</div>
 	</div>
 </body>
