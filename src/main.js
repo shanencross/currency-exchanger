@@ -10,23 +10,37 @@ $("form#currency-form").submit(function(event) {
   const moneyUSD = $("input#USD-input").val();
   const newCurrency = $("input#currency-input").val();
 
-ExchangeRateService.fetchExchangeRateData()
-  .then(function(response) {
-    if (newCurrency in response.conversion_rates) {
-      const exchangeRate = response.conversion_rates[newCurrency] 
-      const convertedMoney = moneyUSD * exchangeRate;
+  ExchangeRateService.fetchExchangeRateData()
+    .then(function(response) {
+      if (response instanceof Error) {
+        throw response;
+      }
 
-      $("#results span#converted-money").text(convertedMoney)
-      $("#results span#new-currency").text(newCurrency);
+      if (response.conversion_rates) {
+        if (newCurrency in response.conversion_rates) {
+          const exchangeRate = response.conversion_rates[newCurrency]; 
+          const convertedMoney = moneyUSD * exchangeRate;
 
-      $("#invalid-currency-message").hide();
+          $("#results span#converted-money").text(convertedMoney);
+          $("#results span#new-currency").text(newCurrency);
+
+          $(".error-message-container").hide();
+          $("#collecting-input").hide();
+          $("#results").show();
+        }
+        else {
+          $("#collecting-input").hide();
+          $(".error-message-container").hide();
+          $("#invalid-currency-message").show();
+          $("#invalid-currency-message #invalid-currency").text(newCurrency);
+        }
+      }
+    })
+    .catch(function(error) {
       $("#collecting-input").hide();
-      $("#results").show();
-    }
-    else {
-      $("#invalid-currency-message").show();
-      $("#invalid-currency-message #invalid-currency").text(newCurrency);
-    }
-  });
+      $(".error-message-container").hide();
+      $("#invalid-request-message").show();
+      $("#invalid-request-error").text(error.message);
+    });
 });
 

@@ -6,6 +6,6 @@
   display: none;
 }
 
-#invalid-currency-message {
+.error-message-container {
   display: none;
 }
