@@ -2,20 +2,11 @@ import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
+import ExchangeRateService from './services/exchange-rate-service.js';
 
 console.log(process.env.API_KEY);
 
-let response = fetch(`https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/latest/USD`)
-  .then(function(response) {
-    if (!response.ok) {
-      throw Error(response.statusText);
-    }
-    return response.json();
-  })
-  .catch(function(error) {
-    return error;
-  });
-
+let response = ExchangeRateService.fetchExchangeRateData();
 response.then(function(nextResponse) {
   console.log(nextResponse);
 });
