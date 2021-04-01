@@ -8,28 +8,36 @@
 		<h1>Currency Exchanger</h1>
 	</div>
 	<div class="container">
-
 		<div id="collecting-input">
 			<p>This website will convert your U.S. dollars to a currency of your choosing!</p>
-			<p>Please enter in the number of U.S. dollars you would like to exchange, and the currency you would like to receive.</p>
-
+			<p>Please enter in the number of U.S. dollars you would like to exchange, and the three-letter code for the currency you would like to receive.</p>
+			<p>Some examples:</p>
+			<ul>
+				<li>CAD -	Canadian Dollar	(Canada)</li>
+				<li>AUD -	Australian Dollar	(Australia)</li>
+				<li>GBP - Pound Sterling (United Kingdom)</li>
+				<li>EUR - Euro	(European Union)</li>
+				<li>JPY -	Japanese Yen (Japan)</li>
+				<li>PHP -	Philippine Peso	(Philippines)</li>
+				<li>KRW -	South Korean Won	(South Korea)</li>
+				<li>BRL	- Brazilian Real	(Brazil)</li>
+			</ul>
 			<form id="currency-form" class="form">
 				<div class="form-group">
 					<label for="USD-input">U.S. Dollars:</label>
-					<input id="USD-input" class="form-control" type="text">
+					<input id="USD-input" class="form-control" type="number" step="any" min="0.0001" value="1">
 				</div>
 				<div class="form-group">
-					<label for="currency-input">New Currency:</label>
+					<label for="currency-input">New Currency Code:</label>
 					<input id="currency-input" class="form-control" type="text">
 				</div>
 				<button id="currency-submit" class="btn btn-primary" type="submit">Submit</button>
 			</form>
 		</div>
-
+		<br>
 		<div id="results">
 			<p>You will receive <span id="converted-money"></span> of the <span id="new-currency"></span> currency</p>
 		</div>
-
 		<div id="invalid-currency-message" class="error-message-container">
 			<p>The currency <span id="invalid-currency"></span> is not supported.</p>
 		</div>
