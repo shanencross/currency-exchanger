@@ -12,14 +12,21 @@ $("form#currency-form").submit(function(event) {
 
 ExchangeRateService.fetchExchangeRateData()
   .then(function(response) {
-    const exchangeRate = response.conversion_rates[newCurrency]
-    const convertedMoney = moneyUSD * exchangeRate;
+    if (newCurrency in response.conversion_rates) {
+      const exchangeRate = response.conversion_rates[newCurrency] 
+      const convertedMoney = moneyUSD * exchangeRate;
 
-    $("#results span#converted-money").text(convertedMoney)
-    $("#results span#new-currency").text(newCurrency);
+      $("#results span#converted-money").text(convertedMoney)
+      $("#results span#new-currency").text(newCurrency);
 
-    $("#collecting-input").hide();
-    $("#results").show();
+      $("#invalid-currency-message").hide();
+      $("#collecting-input").hide();
+      $("#results").show();
+    }
+    else {
+      $("#invalid-currency-message").show();
+      $("#invalid-currency-message #invalid-currency").text(newCurrency);
+    }
   });
 });
 
