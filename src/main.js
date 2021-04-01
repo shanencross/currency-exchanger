@@ -7,9 +7,19 @@ import ExchangeRateService from './services/exchange-rate-service.js';
 $("form#currency-form").submit(function(event) {
   event.preventDefault();
 
-  let response = ExchangeRateService.fetchExchangeRateData();
-  response.then(function(nextResponse) {
-    console.log(nextResponse);
+  const moneyUSD = $("input#USD-input").val();
+  const newCurrency = $("input#currency-input").val();
+
+ExchangeRateService.fetchExchangeRateData()
+  .then(function(response) {
+    const exchangeRate = response.conversion_rates[newCurrency]
+    const convertedMoney = moneyUSD * exchangeRate;
+
+    $("#results span#converted-money").text(convertedMoney)
+    $("#results span#new-currency").text(newCurrency);
+
+    $("#collecting-input").hide();
+    $("#results").show();
   });
 });
 
