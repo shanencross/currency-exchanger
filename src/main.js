@@ -8,36 +8,31 @@ $("form#currency-form").submit(function(event) {
   event.preventDefault();
 
   const moneyUSD = $("input#USD-input").val();
-  const newCurrency = $("input#currency-input").val();
+  const newCurrency = $("input#currency-input").val().toUpperCase();
 
-  ExchangeRateService.fetchExchangeRateData()
+  ExchangeRateService.fetchPairConversionData("USD", newCurrency, moneyUSD)
     .then(function(response) {
       if (response instanceof Error) {
         throw response;
       }
-
-      if (response.conversion_rates) {
-        if (newCurrency in response.conversion_rates) {
-          const exchangeRate = response.conversion_rates[newCurrency]; 
-          const convertedMoney = moneyUSD * exchangeRate;
-
-          $("#results span#converted-money").text(convertedMoney);
-          $("#results span#new-currency").text(newCurrency);
-
-          $(".error-message-container").hide();
-          $("#collecting-input").hide();
-          $("#results").show();
-        }
-        else {
-          $("#collecting-input").hide();
-          $(".error-message-container").hide();
-          $("#invalid-currency-message").show();
-          $("#invalid-currency-message #invalid-currency").text(newCurrency);
-        }
+      if (response["result"] === "error") {
+        $("#results").hide();
+        $(".error-message-container").hide();
+        $("#invalid-currency-message").show();
+        $("#invalid-currency-message #invalid-currency").text(newCurrency);
       }
+      else {
+        const convertedMoney = response.conversion_result;
+        console.log(convertedMoney);
+        $("#results span#converted-money").text(convertedMoney);
+        $("#results span#new-currency").text(newCurrency);
+        
+        $(".error-message-container").hide();
+        $("#results").show();
+      } 
     })
     .catch(function(error) {
-      $("#collecting-input").hide();
+      $("#results").hide();
       $(".error-message-container").hide();
       $("#invalid-request-message").show();
       $("#invalid-request-error").text(error.message);
