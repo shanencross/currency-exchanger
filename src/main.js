@@ -16,25 +16,35 @@ $("form#currency-form").submit(function(event) {
         throw response;
       }
       if (response["result"] === "error") {
-        $("#results").hide();
-        $(".error-message-container").hide();
-        $("#invalid-currency-message").show();
-        $("#invalid-currency-message #invalid-currency").text(newCurrency);
+        displayInvalidCurrencyMessage(newCurrency);
       }
       else {
         const convertedMoney = response.conversion_result;
-        $("#results span#converted-money").text(convertedMoney);
-        $("#results span#new-currency").text(newCurrency);
-
-        $(".error-message-container").hide();
-        $("#results").show();
+        displayResult(convertedMoney, newCurrency);
       } 
     })
     .catch(function(error) {
-      $("#results").hide();
-      $(".error-message-container").hide();
-      $("#invalid-request-message").show();
-      $("#invalid-request-error").text(error.message);
+      displayInvalidRequestMessage(error.message);
     });
 });
 
+function displayResult(convertedMoney, newCurrency) {
+  $("#results span#converted-money").text(convertedMoney);
+  $("#results span#new-currency").text(newCurrency);
+  $(".error-message-container").hide();
+  $("#results").show();
+}
+
+function displayInvalidCurrencyMessage(invalidCurrency) {
+  $("#results").hide();
+  $(".error-message-container").hide();
+  $("#invalid-currency-message").show();
+  $("#invalid-currency-message #invalid-currency").text(invalidCurrency);
+}
+
+function displayInvalidRequestMessage(message) {
+  $("#results").hide();
+  $(".error-message-container").hide();
+  $("#invalid-request-message").show();
+  $("#invalid-request-error").text(message);
+}
