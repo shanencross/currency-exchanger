@@ -5,3 +5,7 @@
 #results {
   display: none;
 }
+
+#invalid-currency-message {
+  display: none;
+}
