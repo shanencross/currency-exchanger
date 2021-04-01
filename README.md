@@ -1,8 +1,8 @@
-# _{Application Name}_
+# Currency Exchanger
 
-#### _{Brief description of application}_
+#### Learning project for Epicodus class. Application for converting currency using exchange rate API
 
-#### By _**{List of contributors}**_
+#### By Shanen Cross
 
 ## Technologies Used
 
@@ -12,20 +12,35 @@
 * JavaScript
 * jQuery
 * Webpack
+* ESLint
+* Babel
 
 ## Description
 
-_{This is a detailed description of your application. Give as much detail as needed to explain what the application does as well as any other information you want users or other developers to have.}_
+A learning project for the Epicodus coding school, made to practice using APIs. Website application for converting from one currency to another, using the proper exchange rate. Uses ExchangeRate-API to get currency exchange rates.
 
 ## Setup/Installation Requirements
 
-* _This is a great place_
-* _to list setup instructions_
-* _in a simple_
-* _easy-to-understand_
-* _format_
+This application uses _ExchangeRate-API_. You'll first need to access their website and create a free account to obtain your own API key for the application to use.
+* Go to [the ExchangeRate-API website](https://www.exchangerate-api.com/)
+* Follow the instructions to sign up for a free key under their Free Plan, entering in your email and desired password
+* The site should provide you with an API key
 
-_{Leave nothing to chance! You want it to be easy for potential users, employers and collaborators to run your app. Do I need to run a server? How should I set up my databases? Is there other code this application depends on? We recommend deleting the project from your desktop, re-cloning the project from GitHub, and writing down all the steps necessary to get the project working again.}_
+To install locally:
+* Install git
+* Install [npm](https://www.npmjs.com/), the JavaScript package manager. For development, I used npm version 6.14.10
+* Use _git clone_ this repository to a local directory
+* Install the necessary modules by executing _npm install_ on the command line
+
+To set up your API key:
+* Create a file named _.env_ and place it you your repository's root directory
+* Inside _.env_, enter the following, but replace the text "yourAPIkey" with the API key you obtained from the ExchangeRate-API website:
+`API_KEY=yourAPIKey`
+* Save your _.env_ file
+
+To run the application:
+* Excute _npm run start_ on the command line to build the project and run a local server. The website will automatically open in your web browser
+* OR, execute _npm run build_ on the command line to build the project, and then open dist/index.html in your web browser.
 
 ## Known Bugs
 
