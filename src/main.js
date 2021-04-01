@@ -23,10 +23,9 @@ $("form#currency-form").submit(function(event) {
       }
       else {
         const convertedMoney = response.conversion_result;
-        console.log(convertedMoney);
         $("#results span#converted-money").text(convertedMoney);
         $("#results span#new-currency").text(newCurrency);
-        
+
         $(".error-message-container").hide();
         $("#results").show();
       } 
