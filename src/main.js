@@ -9,6 +9,7 @@ $("form#currency-form").submit(function(event) {
 
   const moneyUSD = $("input#USD-input").val();
   const newCurrency = $("input#currency-input").val().toUpperCase();
+  console.log("testing something with github");
 
   ExchangeRateService.fetchPairConversionData("USD", newCurrency, moneyUSD)
     .then(function(response) {
